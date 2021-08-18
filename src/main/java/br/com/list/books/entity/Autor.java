@@ -18,7 +18,11 @@ public class Autor {
     @Column(name = "nome")
     private String nome;
 
-    private Autor(String nome){
+    public Autor() {
+    }
+
+    public Autor(Long id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 }

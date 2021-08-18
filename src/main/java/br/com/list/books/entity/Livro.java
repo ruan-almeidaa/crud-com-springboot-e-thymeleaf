@@ -18,7 +18,6 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Livro {
 
     @Id
@@ -32,6 +31,9 @@ public class Livro {
     @ManyToOne
     @JoinColumn(name = "autor_id")
     private Autor autor;
+
+    public Livro() {
+    }
 
     public Livro(String nome, Autor autor) {
         this.nome = nome;
