@@ -3,6 +3,7 @@ package br.com.list.books.controllers;
 import br.com.list.books.entity.Autor;
 import br.com.list.books.entity.Livro;
 import br.com.list.books.service.AutorService;
+import br.com.list.books.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class BookController {
+public class LivroController {
 
     @Autowired
     private AutorService autorService;
+
+    @Autowired
+    private LivroService livroService;
 
     @GetMapping("/book/add")
     public ModelAndView getFormAdd(){
@@ -39,6 +43,8 @@ public class BookController {
                     "verifique os campos obrigatórios!");
             return "redirect:/book/form/add";
         }
+
+        this.livroService.save(livro);
         return "redirect:/lista";
     }
 }
