@@ -22,7 +22,7 @@ public class Livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Column(name = "nome")

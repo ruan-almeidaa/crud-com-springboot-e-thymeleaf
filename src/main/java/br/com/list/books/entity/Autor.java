@@ -13,10 +13,10 @@ public class Autor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    public Long id;
 
     @Column(name = "nome")
-    private String nome;
+    public String nome;
 
     public Autor() {
     }
