@@ -7,6 +7,7 @@ import br.com.list.books.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,13 +38,32 @@ public class LivroController {
     @PostMapping("/book/form/save")
     public String saveBook(@Valid Livro livro, BindingResult result,
                            RedirectAttributes redirect){
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             redirect.addFlashAttribute("mensagem",
-                    "verifique os campos obrigatórios!");
+                    "Verifique os campos obrigatórios");
             return "redirect:/book/form/add";
         }
 
         this.livroService.save(livro);
-        return "redirect:/lista";
+        return "redirect:/";
     }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView getEdit(@PathVariable("id") Long id){
+
+        ModelAndView mv = new ModelAndView("bookform");
+        List<Autor> autorList = this.autorService.getAutorList();
+        mv.addObject("autorList", autorList);
+
+        Livro livro = this.livroService.findById(id);
+        mv.addObject("livro", livro);
+        return mv;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id){
+        this.livroService.delete(id);
+        return "redirect:/";
+    }
+
 }

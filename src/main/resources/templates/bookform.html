@@ -1,12 +1,32 @@
+<html>
+    <head>
 
-<form action="/book/form/save" method="post">
-    Nome: <input type="text" id="nome" name="nome" />
+    </head>
 
-    Autor: <select name="autor">
-            <option th:each="autor : ${autorList}"
+    <body>
+        <div th:if="${mensagem}" th:text="${mensagem}"></div>
+
+
+        <form action="/book/form/save" method="post">
+
+            <div th:if="${livro}">
+                <input type="text" readonly id="id" name="id" th:value="${livro?.id}">
+            </div>
+
+
+            <input type="text" id="nome" name="nome"
+            th:value="${livro?.nome}"
+            />
+
+            Autor: <select name="autor">
+                    <option th:each="autor : ${autorList}"
                     th:value="${autor.id}"
-                    th:text="${autor.nome}"/>
-            </select>
-    <button type="submit"> Salvar Livro</button>
+                    th:text="${autor.nome}"
+                    th:selected="${autor.id} == ${livro?.autor?.id}"
+                    />
+                </select>
+            <button type="submit"> Salvar Livro</button>
 
-</form>
+        </form>
+    </body>
+</html>

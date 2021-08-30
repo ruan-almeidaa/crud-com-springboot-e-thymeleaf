@@ -21,4 +21,13 @@ public class LivroService {
     public List<Livro> findAll() {
         return this.livroRepository.findAll();
     }
+
+    public Livro findById(Long id) {
+
+        return this.livroRepository.findById(id).get();
+    }
+
+    public void delete(Long id) {
+        this.livroRepository.deleteById(id);
+    }
 }
